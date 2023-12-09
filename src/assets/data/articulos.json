@@ -1,4 +1,7 @@
-[
+{
+  "status": "ok",
+  "totalResults": 38,
+  "articles": [
     {
       "source": { "id": "the-washington-post", "name": "The Washington Post" },
       "author": "Tony Romm",
@@ -199,4 +202,5 @@
       "publishedAt": "2021-09-27T11:08:06Z",
       "content": "Petrol pumps in English cities are running dry after panic buying worsened shortages caused by a lack of truckers.\r\nQueues of cars snaked back from filling stations across the country on Sunday, swal… [+2946 chars]"
     }
-]
+  ]
+}

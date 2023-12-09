@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { INoticias } from '../interfaces/mis-interfaces';
+import { Article, INoticias } from '../interfaces/mis-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -9,19 +9,21 @@ import { Observable } from 'rxjs';
 
 export class GestionNoticiasService {
   
-  private noticias: INoticias[] = [];
-  public nuevasNoticias: INoticias[] = [];
+  private noticias: Article[] = [];
+  private copiaNoticias: INoticias | undefined;
+  private nuevasNoticias: Article[] = [];
 
   constructor(private leerFichero: HttpClient) { 
     this.getNoticiasFichero();
   }
 
   getNoticiasFichero() {
-    let datosFichero: Observable<INoticias[]>;
-    datosFichero = this.leerFichero.get<INoticias[]>("/assets/data/articulos.json");
+    let datosFichero: Observable<INoticias>;
+    datosFichero = this.leerFichero.get<INoticias>("/assets/data/articulos.json");
     datosFichero.subscribe(datos => {
       console.log(datos);
-      this.noticias.push(...datos)
+      this.copiaNoticias = datos;
+      this.noticias = this.copiaNoticias.articles;
       console.log(this.noticias)
     });
   }
@@ -30,7 +32,7 @@ export class GestionNoticiasService {
     return this.noticias;
   }
 
-  guardarNoticias(noticia: INoticias) {
+  guardarNoticias(noticia: Article) {
     this.nuevasNoticias.push(noticia);
     console.log(this.nuevasNoticias);
   }
@@ -39,12 +41,12 @@ export class GestionNoticiasService {
     return this.nuevasNoticias;
   }
 
-  borrarNoticias(noticia: INoticias) {
+  borrarNoticias(noticia: Article) {
     console.log(noticia);
     
     // Busca la noticia con el content dado
     //let noticiaEncontrada: INoticias | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia.title == title });
-    let noticiaEncontrada: INoticias | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia == noticia });
+    let noticiaEncontrada: Article | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia == noticia });
     console.log(noticiaEncontrada)
 
     // Busca el índice de la noticia 

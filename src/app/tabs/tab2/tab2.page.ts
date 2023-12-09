@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { INoticias } from 'src/app/interfaces/mis-interfaces';
+import { Article, INoticias } from 'src/app/interfaces/mis-interfaces';
 import { GestionNoticiasService } from 'src/app/services/gestion-noticias.service';
 
 @Component({
@@ -13,11 +13,11 @@ export class Tab2Page {
   constructor(public gestionNoticias: GestionNoticiasService,
     private alerta: AlertController) {}
 
-    borrarNoticia(noticia: INoticias) {
+    borrarNoticia(noticia: Article) {
       this.presentarAlerta(noticia);
     }
 
-    async presentarAlerta(noticia: INoticias) {
+    async presentarAlerta(noticia: Article) {
       const alert = await this.alerta.create({
         backdropDismiss: false, // No permite hacer nada mas hasta contestar la alerta 
         header: 'Confirmar',

@@ -39,11 +39,12 @@ export class GestionNoticiasService {
     return this.nuevasNoticias;
   }
 
-  borrarNoticias(noticia: INoticias, title: string) {
+  borrarNoticias(noticia: INoticias) {
     console.log(noticia);
     
     // Busca la noticia con el content dado
-    let noticiaEncontrada: INoticias | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia.title == title });
+    //let noticiaEncontrada: INoticias | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia.title == title });
+    let noticiaEncontrada: INoticias | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia == noticia });
     console.log(noticiaEncontrada)
 
     // Busca el índice de la noticia 

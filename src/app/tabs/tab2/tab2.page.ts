@@ -33,9 +33,8 @@ export class Tab2Page {
           },
           {
             text: 'Okay',
-            handler: (data) => {
-              console.log(data);
-              //this.gestionNoticias.borrarNoticias(data, data.title);
+            handler: () => {
+              this.gestionNoticias.borrarNoticias(noticia);
             }
           }
         ]

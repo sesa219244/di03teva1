@@ -1,38 +1,21 @@
 <app-header-tab></app-header-tab>
 
-<!--<ion-content [fullscreen]="true">
-  <ion-list *ngFor="let noticia of gestionNoticias.getNuevasNoticias()">
-    <ion-item lines="none">
-      <ion-label color="primary"><strong>{{noticia.source.name}}</strong></ion-label>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label>{{noticia.title}}</ion-label>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-img src="{{noticia.urlToImage}}"></ion-img>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label>{{noticia.content}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <a href="{{noticia.url}}">Leer</a>
-      <ion-icon slot="end" name="trash" (click)="gestionNoticias.borrarNoticias(noticia, noticia.title)"></ion-icon>
-    </ion-item>
-  </ion-list>
-</ion-content>-->
-
 <ion-content [fullscreen]="true">
   <ion-list *ngFor="let noticia of gestionNoticias.getNuevasNoticias()">
     <ion-card>
       <ion-card-header>
         <ion-card-title>{{noticia.title}}</ion-card-title>
+        <p>{{noticia.source.name}}, {{noticia.publishedAt}}</p>
         <img alt="" src="{{noticia.urlToImage}}"/>
-        <ion-card-subtitle>{{noticia.content}}</ion-card-subtitle>
+        <ion-card-subtitle>
+          <p>{{noticia.description}}</p>
+          <p>{{noticia.author}}</p>
+        </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         <ion-item>
           <a href="{{noticia.url}}">Leer</a>
-          <ion-icon slot="end" name="trash" (click)="gestionNoticias.borrarNoticias(noticia, noticia.title)"></ion-icon>
+          <!--<ion-icon slot="end" name="trash" (click)="gestionNoticias.borrarNoticias(noticia)"></ion-icon>-->
           <ion-icon slot="end" name="trash" (click)="borrarNoticia(noticia)"></ion-icon>
         </ion-item>
       </ion-card-content>

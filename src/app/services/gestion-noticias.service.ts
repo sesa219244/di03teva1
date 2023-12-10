@@ -9,59 +9,80 @@ import { Observable } from 'rxjs';
 
 export class GestionNoticiasService {
   
+  // Creamos una variable noticias del tipo Array Article
   private noticias: Article[] = [];
+  // Creamos una variable copiaNoticias del tipo INoticias para copiar las noticias del fichero JSON
   private copiaNoticias: INoticias | undefined;
+  // Creamos una variable nuevasNoticias del tipo Array Article donde copiaremos las noticias seleccionadas
   private nuevasNoticias: Article[] = [];
 
+  // En el contructor creamos una variable para leer el fichero JSON del tipo HttpClient
   constructor(private leerFichero: HttpClient) { 
     this.getNoticiasFichero();
   }
 
+  // Creamos un metodo donde obtendremos las noticias del fichero JSON
   getNoticiasFichero() {
+    // Creamos una variable Observable del tipo INoticias para recoger los datos del fichero JSON
     let datosFichero: Observable<INoticias>;
+    // Leemos el fichero y lo almacenamos en la variable datosFIchero de tipo Observable
     datosFichero = this.leerFichero.get<INoticias>("/assets/data/articulos.json");
+    // Subscribimos el observable a traves de una función con la variable datos
     datosFichero.subscribe(datos => {
+      console.log("Información extraida del fichero JSON");
       console.log(datos);
+      // Copiamos datos a la variable copiaNoticias de tipo INoticias
       this.copiaNoticias = datos;
+      // Pasamos los datos del array articles a la variabl noticias de tipo Article
       this.noticias = this.copiaNoticias.articles;
+      console.log("Información copiada en la variable noticias: Article[]");
       console.log(this.noticias)
     });
   }
 
+  // Método para obtener el array de la variable noticias
   getNoticias() {
     return this.noticias;
   }
 
+  // Método para guardar las noticias seleccionadas
   guardarNoticias(noticia: Article) {
+    // Agrgamos la noticia seleccionada en la variable Array nuevasNoticias
     this.nuevasNoticias.push(noticia);
+    console.log("Información copiada en la variable nuevasNoticias: Article[]");
     console.log(this.nuevasNoticias);
   }
 
+  // Método para obtener el array de la variable nuevasNoticias
   getNuevasNoticias() {
     return this.nuevasNoticias;
   }
 
+  // Método para borrar las noticias seleccionadas
   borrarNoticias(noticia: Article) {
-    console.log(noticia);
-    
+
     // Busca la noticia con el content dado
-    //let noticiaEncontrada: INoticias | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia.title == title });
     let noticiaEncontrada: Article | undefined = this.nuevasNoticias.find(function(unaNoticia) { return unaNoticia == noticia });
+    console.log("Noticia encontrada a borrarse");
     console.log(noticiaEncontrada)
 
-    // Busca el índice de la noticia 
+    // Busca el índice de la noticia dada 
     let indice: number = -1;
+    // Condicionamos para en el caso de que la noticiaEncontrada no esté undefined
     if (noticiaEncontrada == undefined) {}
     else {
+      // Se devuelve el indice del primer elemento que coincide con la noticiaEncontrada
       indice = this.nuevasNoticias.indexOf(noticiaEncontrada)
     };
-    console.log(indice);
+    console.log("Indice del Array: " + indice);
 
     // Borra la persona con el índice obtenido
     if (indice == -1) {}
     else {
+       // Eliminamos la noticia del Array nuevasNoticias en función del índice dado 
       this.nuevasNoticias.splice(indice, 1)
     };
+    console.log("Nuevo Array de nuevasNoticias");
     console.log(this.nuevasNoticias);
   }
 

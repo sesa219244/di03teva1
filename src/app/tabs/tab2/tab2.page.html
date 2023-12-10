@@ -1,21 +1,29 @@
 <app-header-tab></app-header-tab>
 
 <ion-content [fullscreen]="true">
+  <!-- Creamos un *ngFor para leer las nuevasNoticias -->
   <ion-list *ngFor="let noticia of gestionNoticias.getNuevasNoticias()">
+    <!-- Usamos ion-card para dar formato al content -->
     <ion-card>
+      <!-- Usamos un ion-card header -->
       <ion-card-header>
         <ion-card-title>{{noticia.title}}</ion-card-title>
         <p>{{noticia.source.name}}, {{noticia.publishedAt}}</p>
         <img alt="" src="{{noticia.urlToImage}}"/>
-        <ion-card-subtitle>
-          <p>{{noticia.description}}</p>
-          <p>{{noticia.author}}</p>
-        </ion-card-subtitle>
       </ion-card-header>
+      <!-- Usamos un ion-card subtitle -->
+      <ion-card-subtitle>
+        <p>{{noticia.description}}</p>
+        <p>{{noticia.author}}</p>
+      </ion-card-subtitle>
+      <!-- Usamos un ion-card content -->  
       <ion-card-content>
         <ion-item>
-          <a href="{{noticia.url}}">Leer</a>
-          <!--<ion-icon slot="end" name="trash" (click)="gestionNoticias.borrarNoticias(noticia)"></ion-icon>-->
+          <!-- Creamos el enlace para ver la noticia completa -->
+          <a href="{{noticia.url}}" target="_blank">Leer</a>
+          <!-- Creamos el icono borrar la noticia SIN uso de un alertController -->
+          <!-- <ion-icon slot="end" name="trash" (click)="gestionNoticias.borrarNoticias(noticia)"></ion-icon>-->
+          <!-- Creamos el icono borrar la noticia CON uso de un alertController -->
           <ion-icon slot="end" name="trash" (click)="borrarNoticia(noticia)"></ion-icon>
         </ion-item>
       </ion-card-content>

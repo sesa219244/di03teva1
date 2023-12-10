@@ -7,8 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderTabComponent  implements OnInit {
 
-  //@Input() title: string = "";
-
   constructor() { }
 
   ngOnInit() {}

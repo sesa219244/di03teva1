@@ -1,9 +1,11 @@
 <app-header-tab></app-header-tab>
 
 <ion-content [fullscreen]="true">
+    <!-- Creamos un *ngFor para leer las noticias -->
     <ion-list *ngFor="let noticia of gestionNoticias.getNoticias()">
       <ion-card>
         <ion-item lines="none">
+          <!-- Creamos un ion-checkbox para seleccionar las noticias a guardar -->
           <ion-checkbox LabelPlacement="start" (click)="gestionNoticias.guardarNoticias(noticia)">
             <ion-label color="primary"><strong>{{noticia.source.name}}</strong></ion-label>
           </ion-checkbox>

@@ -47,8 +47,20 @@ export class GestionNoticiasService {
 
   // Método para guardar las noticias seleccionadas
   guardarNoticias(noticia: Article) {
-    // Agrgamos la noticia seleccionada en la variable Array nuevasNoticias
-    this.nuevasNoticias.push(noticia);
+    // Creamos una variable señal para controlar si ya se dispone de la noticia
+    let señal: number = 0;
+    
+    // Se crea un bucle for para buscar la noticia en el Array nuevasNoticias
+    for (let i = 0; i <= this.nuevasNoticias.length; i++) {
+      if (this.nuevasNoticias[i] == noticia || señal == 1) {
+        señal = 1}
+    }
+
+    // Si no se ha encontrado la noticia en el Array se da orden de agregarla
+    if (señal == 0) {
+      // Agregamos la noticia seleccionada en la variable Array nuevasNoticias
+      this.nuevasNoticias.push(noticia);
+    }
     console.log("Información copiada en la variable nuevasNoticias: Article[]");
     console.log(this.nuevasNoticias);
   }
